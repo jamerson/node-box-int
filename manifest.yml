@@ -5,7 +5,7 @@ declared-services:
     plan: tiered
 applications:
 - name: personality-box
-  host: personality-box
+  host: jrfl-personality-box
   framework: node
   runtime: node12
   memory: 128M
