@@ -1,15 +1,7 @@
 var passport = require('passport'),
-    morgan = require('morgan'),
-    bodyParser = require('body-parser'),
-    cookieParser = require('cookie-parser'),
-    session = require('express-session'),
-    methodOverride = require('method-override'),
     BoxStrategy = require('passport-box').Strategy,
     box_sdk = require('box-sdk'),
     fs = require("fs"),
-    watson = require('watson-developer-cloud'),
-    _ = require("underscore"),
-    uuid = require("node-uuid"),
     cfenv = require("cfenv");
 
 var vcapLocal = null;
