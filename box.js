@@ -13,7 +13,7 @@ catch (e) {}
 var appEnvOpts = vcapLocal ? {vcap:vcapLocal} : {};
 var appEnv = cfenv.getAppEnv(appEnvOpts);
 
-var boxCreds = getServiceCreds(appEnv, "box"),
+var boxCreds = appEnv.getServiceCreds("box"),
     box = box_sdk.Box();
 
 passport.serializeUser(function (user, done) {
