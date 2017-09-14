@@ -1,48 +1,27 @@
 {
-  "name": "personality-box",
-  "version": "1.0.1",
+  "name": "get-started-node",
+  "main": "box.js",
+  "description": "An introduction to developing Node.js apps on the Bluemix platform",
+  "version": "0.1.1",
   "private": false,
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js",
-    "postinstall": "bower install --allow-root --config.interactive=false"
-  },
   "engines": {
-    "node": "0.12.*"
+    "node": "6.*"
+  },
+  "scripts": {
+    "start": "node box.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/IBM-Bluemix/box-watson.git"
+    "url": "https://github.com/IBM-Bluemix/get-started-node"
   },
   "dependencies": {
-    "express": "4.9.x",
-    "bower": "1.6.x",
-    "ejs": "2.4.x",
-    "passport": "0.3.x",
-    "passport-box": "0.1.x",
-    "box-sdk": "0.0.x",
-    "morgan": "1.6.x",
-    "body-parser": "1.14.x",
-    "cookie-parser": "1.4.x",
-    "express-session": "1.13.x",
-    "method-override": "2.3.x",
-    "watson-developer-cloud": "1.2.x",
-    "underscore": "1.8.x",
-    "node-uuid": "1.4.x",
-    "cfenv": "1.0.x",
-    "cf-deployment-tracker-client": "0.0.x"
+    "box-sdk": "0.0.6",
+    "cfenv": "^1.0.x",
+    "cloudant": "^1.7.x",
+    "dotenv": "^4.0.0",
+    "passport": "0.4.0",
+    "passport-box": "2.1.0"
   },
-  "author": [
-    {
-      "name": "Jeff Sloyer",
-      "email": "jbsloyer@us.ibm.com"
-    }
-  ],
-  "contributors": [
-    {
-      "name": "Jake Peyser",
-      "email": "jepeyser@us.ibm.com"
-    }
-  ],
+  "author": "IBM Corp",
   "license": "Apache-2.0"
 }
