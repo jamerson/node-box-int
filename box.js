@@ -24,6 +24,8 @@ passport.deserializeUser(function (obj, done) {
     done(null, obj);
 });
 
+console.log(boxCreds.clientId, boxCreds.clientSecret)
+
 passport.use(new BoxStrategy({
     clientID: boxCreds.clientId || boxCreds.client_id,
     clientSecret: boxCreds.clientSecret || boxCreds.client_secret,
