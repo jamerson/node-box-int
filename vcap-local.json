@@ -6,9 +6,9 @@
             "label": "user-provided",
             "credentials": {
               "url": "https://api.box.com",
-              "apikey": "API_KEY",
-              "clientId": "CLIENT_ID",
-              "clientSecret": "CLIENT_SECRET"
+              "apikey": "B6khzeFfEnatPbg3AzQ4GiX3wTk2bu2b",
+              "clientId": "y4jlvu4u54nkertfi0trly3ccpu6ln7k",
+              "clientSecret": "zRv4J3ReQR69DzhAGyoPVMbEPG3XobiJ"
             }
          }
       ],
