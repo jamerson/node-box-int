@@ -21,7 +21,7 @@ client.users.get(client.CURRENT_USER_ID)
 	.then(user => console.log('Hello', user.name, '!'))
     .catch(err => console.log('Got an error!', err));
     
-client.files.getReadStream('jamerson_curriculo.pdf', null, function(error, stream) {
+client.files.getReadStream('24970300', null, function(error, stream) {
     if (error) {
         console.log('Got an error!', error)
     }
