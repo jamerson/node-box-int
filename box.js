@@ -1,33 +1,21 @@
-var passport = require('passport'),
-    BoxStrategy = require('passport-box').Strategy,
-    box_sdk = require('box-sdk'),
-    fs = require("fs"),
-    cfenv = require("cfenv");
+// Initialize SDK
+var BoxSDK = require('box-node-sdk');
 
-var vcapLocal = null;
-try {
-    vcapLocal = require("./vcap-local.json");
-}
-catch (e) {}
-
-var appEnvOpts = vcapLocal ? {vcap:vcapLocal} : {};
-var appEnv = cfenv.getAppEnv(appEnvOpts);
-
-var boxCreds = appEnv.getServiceCreds("box"),
-    box = box_sdk.Box();
-
-passport.serializeUser(function (user, done) {
-    done(null, user);
+var sdk = new BoxSDK({
+  clientID: '5aovqb83nsbmbd7vkc12lzzxe0n9drqf',
+  clientSecret: 'lGKXzM1Dlq2vK4ZFTcVIAHQncomSUmUa'
 });
 
-passport.deserializeUser(function (obj, done) {
-    done(null, obj);
+// Create a basic API client
+var client = sdk.getBasicClient('n62vU5nN2qvu60scIr6NkcFlQOSs84hF');
+
+// Get some of that sweet, sweet data!
+client.users.get(client.CURRENT_USER_ID, null, function(err, currentUser) {
+  if(err) throw err;
+  console.log('Hello, ' + currentUser.name + '!');
 });
 
-console.log('jrfl', boxCreds.clientId, boxCreds.clientSecret)
-
-passport.use(new BoxStrategy({
-    clientID: boxCreds.clientId || boxCreds.client_id,
-    clientSecret: boxCreds.clientSecret || boxCreds.client_secret,
-    callbackURL: config.appURL(appEnv.port) + "/auth/box/callback"
-}, box.authenticate()));
+// The SDK also supports Promises
+client.users.get(client.CURRENT_USER_ID)
+	.then(user => console.log('Hello', user.name, '!'))
+	.catch(err => console.log('Got an error!', err));
