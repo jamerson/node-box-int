@@ -34,9 +34,9 @@ let serviceAccountClient = session.getAppAuthClient('enterprise')
 
 
 
-serviceAccountClient.folders.getItems(,null,(error, data)=> {
-    console.log(data)
-})
+// serviceAccountClient.folders.getItems(,null,(error, data)=> {
+//     console.log(data)
+// })
 
 // serviceAccountClient.folders.create('38511393171','test2', (error, data)=>{
 //     // { type: 'folder',
