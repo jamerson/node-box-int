@@ -111,7 +111,7 @@ class BoxFsi {
     readdir (file_path) {
 		return new Promise((resolve, reject) => {
             this.getEntryId(file_path).then((fileDescriptor)=> {
-                this.serviceAccountClient.files.getItems(fileDescriptor.id, null, (error, data)=> {
+                this.serviceAccountClient.folders.getItems(fileDescriptor.id, null, (error, data)=> {
                     if(error) {
                         reject(error)
                         return
@@ -209,9 +209,17 @@ var fsi = new BoxFsi()
 //     console.log(ex)
 // })
 
-fsi.readFile('00 intro/intro_Speech.mp3').then((result)=>{
-    let writableStream = fs.createWriteStream('file2.txt')
-    result.pipe(writableStream)
+// fsi.readFile('00 intro/intro_Speech.mp3').then((result)=>{
+//     let writableStream = fs.createWriteStream('file2.txt')
+//     result.pipe(writableStream)
+// },(error)=>{
+//     console.log(error)
+// }).catch(function (ex) {
+//     console.log(ex)
+// })
+
+fsi.readdir('00 intro').then((result)=>{
+    console.log(result)
 },(error)=>{
     console.log(error)
 }).catch(function (ex) {
