@@ -1,6 +1,6 @@
 {
   "name": "get-started-node",
-  "main": "box.js",
+  "main": "BoxFsi.js",
   "description": "An introduction to developing Node.js apps on the Bluemix platform",
   "version": "0.1.1",
   "private": false,
@@ -8,7 +8,7 @@
     "node": "6.*"
   },
   "scripts": {
-    "start": "node box.js"
+    "start": "node BoxFsi.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,8 @@
     "dotenv": "^4.0.0",
     "passport": "0.4.0",
     "passport-box": "2.1.0",
-    "box-node-sdk": "1.9.0"
+    "box-node-sdk": "1.9.0",
+    "rimraf": "2.6.2"
   },
   "author": "IBM Corp",
   "license": "Apache-2.0"

@@ -78,6 +78,7 @@ class BoxFsi {
             })
         }
     }
+
     getEntryId(item_path) {
         return new Promise((resolve, reject) => {
             if(!this.descriptorIdMap) {
@@ -107,15 +108,14 @@ class BoxFsi {
     }
 
 	// returns a promise containing the list of files on a given directory
-	readdir (path) {
-        return new Promise((resolve, reject) => {
-            this.getEntryId(path).then((fileDescriptor)=> {
-                this.serviceAccountClient.folders.getItems(fileDescriptor.id, null, (error, data)=> {
+    readdir (file_path) {
+		return new Promise((resolve, reject) => {
+            this.getEntryId(file_path).then((fileDescriptor)=> {
+                this.serviceAccountClient.files.getItems(fileDescriptor.id, null, (error, data)=> {
                     if(error) {
                         reject(error)
                         return
                     }
-    
                     let result = data.entries.map((item)=>{ 
                         return item.name 
                     })
@@ -123,6 +123,8 @@ class BoxFsi {
                 })
             },(error)=>{
                 reject(error)
+            }).catch(function (ex) {
+                reject({error: "Internal Exception", exception: ex})
             })
         })
 	}
@@ -130,12 +132,12 @@ class BoxFsi {
 	// returns synchronously the list of files on a given directory
 	readdirSync (directory) {
 		throw new TypeError("FSI is merely an interface, override this method");
-	}
+    }
 
 	// returns a promise containing data from a file (stream)
-	readFile (path, encoding) {
+	readFile (file_path, encoding) {
 		return new Promise((resolve, reject) => {
-            this.getEntryId(path).then((fileDescriptor)=> {
+            this.getEntryId(file_path).then((fileDescriptor)=> {
                 this.serviceAccountClient.files.getReadStream(fileDescriptor.id, null, (error, data)=> {
                     if(error) {
                         reject(error)
@@ -171,14 +173,21 @@ class BoxFsi {
                 reject(error)
             })
         })
+    }
+    
+    isDirectory (file_path) {
+		return new Promise((resolve, reject) => {
+            this.getEntryId(file_path).then((fileDescriptor)=> {
+                resolve(fileDescriptor.type === 'folder')
+            },(error)=>{
+                reject(error)
+            }).catch(function (ex) {
+                reject({error: "Internal Exception", exception: ex})
+            })
+        })
 	}
     
     // check if it is a directory
-	isDirectorySync (path) {
-		throw new TypeError("FSI is merely an interface, override this method");
-	}
-
-	// check if it is a directory
 	isDirectorySync (path) {
 		throw new TypeError("FSI is merely an interface, override this method");
 	}
@@ -191,14 +200,14 @@ class BoxFsi {
 
 var fsi = new BoxFsi()
 
-fsi.readFile('uploadtest2.txt').then((result)=>{
-    let writableStream = fs.createWriteStream('file2.txt')
-    result.pipe(writableStream)
-},(error)=>{
-    console.log(error)
-}).catch(function (ex) {
-    console.log(ex)
-})
+// fsi.readFile('uploadtest2.txt').then((result)=>{
+//     let writableStream = fs.createWriteStream('file2.txt')
+//     result.pipe(writableStream)
+// },(error)=>{
+//     console.log(error)
+// }).catch(function (ex) {
+//     console.log(ex)
+// })
 
 fsi.readFile('00 intro/intro_Speech.mp3').then((result)=>{
     let writableStream = fs.createWriteStream('file2.txt')
